@@ -1,8 +1,8 @@
 import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import CategoryCard from "./CategoryCard.tsx";
-import { ICategoryItem } from "./types.ts";
-import { apiClient } from "../../utils/api/apiClient.ts";
+import { ICategoryItem } from "../types.ts";
+import { apiClient } from "../../../utils/api/apiClient.ts";
 
 const CategoryListPage = () => {
    const [categories, setCategories] = useState<ICategoryItem[]>([]);

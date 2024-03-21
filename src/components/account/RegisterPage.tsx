@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, Image, Divider, Flex, Form, Input, Row, Typography, message, Spin } from 'antd';
 import logo from '../../assets/login.png';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux/index.ts';
 import { Link, useNavigate } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { useNotification } from '../../hooks/notification';
-import { Status } from '../../utils/enums';
-import { IRegister } from "../../interfaces/account";
+import { useNotification } from '../../hooks/notification/index.ts';
+import { Status } from '../../utils/enums/index.ts';
+import { IRegister } from "../../interfaces/account/index.ts";
 import { register } from "../../store/accounts/accounts.actions.ts";
 
 const { Title } = Typography;

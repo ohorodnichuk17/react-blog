@@ -7,7 +7,7 @@ const { Content, Footer } = Layout;
 
 const DefaultLayout = () => {
    const {
-      token: { colorBgContainer, borderRadiusLG },
+      //token: { colorBgContainer, borderRadiusLG },
    } = theme.useToken();
 
    return (

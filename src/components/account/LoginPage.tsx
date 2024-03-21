@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button, Image, Divider, Flex, Form, Input, Row, Typography, message, Spin } from 'antd';
 import logo from '../../assets/login.png';
-import { ILogin } from '../../interfaces/account';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { ILogin } from '../../interfaces/account/index.ts';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux/index.ts';
 import { login } from '../../store/accounts/accounts.actions.ts';
 import { Link, useNavigate } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { useNotification } from '../../hooks/notification';
-import { Status } from '../../utils/enums';
+import { useNotification } from '../../hooks/notification/index.ts';
+import { Status } from '../../utils/enums/index.ts';
 
 const { Title } = Typography;
 

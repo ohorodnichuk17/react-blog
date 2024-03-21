@@ -26,8 +26,8 @@ const DefaultHeader = () => {
             selectedKeys={[location.pathname.substr(1)]}
             style={{ flex: 1, minWidth: 0 }}
          >
-            <Menu.Item key={"products"} style={{ color: '#8B5CF6' }}>
-               <Link to={`/product`} style={{ color: 'inherit' }}>Категорії</Link>
+            <Menu.Item key={"categories"} style={{ color: '#8B5CF6' }}>
+               <Link to={`/category`} style={{ color: 'inherit' }}>Категорії</Link>
             </Menu.Item>
          </Menu>
 

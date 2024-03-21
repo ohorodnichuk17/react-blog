@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Col, Typography } from "antd";
 import Meta from "antd/es/card/Meta";
-import { ICategoryItem } from "./types";
+import { ICategoryItem } from "../types";
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
