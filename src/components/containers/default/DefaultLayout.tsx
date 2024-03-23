@@ -1,37 +1,27 @@
-import { Breadcrumb, Layout, theme } from "antd";
-import DefaultHeader from "./DefaultHeader";
-import DefaultSider from "./DefaultSider";
-import { Outlet } from "react-router-dom";
+import { Layout } from 'antd';
+import DefaultHeader from './DefaultHeader';
+import DefaultSider from './DefaultSider';
+import { Outlet } from 'react-router-dom';
 
 const { Content, Footer } = Layout;
 
 const DefaultLayout = () => {
-   const {
-      //token: { colorBgContainer, borderRadiusLG },
-   } = theme.useToken();
-
    return (
-      <Layout>
+      <Layout style={{ minHeight: '100vh' }}>
          <DefaultHeader />
 
-         <Content style={{ padding: '0 48px' }}>
-            <Breadcrumb style={{ margin: '16px 0', color: '#8B5CF6' }}>
-               <Breadcrumb.Item>Home</Breadcrumb.Item>
-               <Breadcrumb.Item>List</Breadcrumb.Item>
-               <Breadcrumb.Item>App</Breadcrumb.Item>
-            </Breadcrumb>
-            <Layout
-               style={{ padding: '24px 0', background: '#FFF2E8', borderRadius: '20px' }}
-            >
+         <Content style={{ padding: '0 24px' }}>
+            <Layout style={{ padding: '24px 0', minHeight: 'calc(100vh - 64px)' }}>
                <DefaultSider />
-               <Content style={{ padding: '0 24px', minHeight: 280 }}>
+               <Content style={{ padding: '0 24px', minHeight: '280px' }}>
                   <Outlet />
                </Content>
             </Layout>
          </Content>
-         <Footer style={{ textAlign: 'center', backgroundColor: '#FFF2E8', position: "absolute", bottom: "0", right: "0", left: "0" }}></Footer>
+
+         <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
       </Layout>
-   )
-}
+   );
+};
 
 export default DefaultLayout;

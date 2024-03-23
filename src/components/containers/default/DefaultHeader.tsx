@@ -1,9 +1,10 @@
 import { Button, Layout, Menu } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import { UserOutlined, PoweroffOutlined, UserAddOutlined } from '@ant-design/icons';
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
-import ButtonGroup from "antd/es/button/button-group";
-import { logout } from "../../../store/accounts/accounts.slice.ts";
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { logout } from '../../../store/accounts/accounts.slice.ts';
+import ButtonGroup from 'antd/es/button/button-group';
+import { BackBtn } from '../../btn/BackBtn.tsx';
 
 const { Header } = Layout;
 
@@ -18,16 +19,22 @@ const DefaultHeader = () => {
    };
 
    return (
-      <Header style={{ display: 'flex', alignItems: 'center', backgroundColor: '#FFF2E8', padding: '0 20px' }}>
-         <div className="demo-logo" />
+      <Header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+         <div style={{ display: 'flex', alignItems: 'center' }}>
+            <BackBtn />
+            <div className="demo-logo" />
+         </div>
+
          <Menu
-            theme="light"
+            theme="dark"
             mode="horizontal"
-            selectedKeys={[location.pathname.substr(1)]}
+            selectedKeys={[location.pathname.substr(1)]} // Highlight the selected menu item
             style={{ flex: 1, minWidth: 0 }}
          >
-            <Menu.Item key={"categories"} style={{ color: '#8B5CF6' }}>
-               <Link to={`/category`} style={{ color: 'inherit' }}>Категорії</Link>
+            <Menu.Item key={'categories'}>
+               <Link to={`/`} style={{ textDecoration: 'none' }}>
+                  Categories
+               </Link>
             </Menu.Item>
          </Menu>
 
@@ -35,33 +42,33 @@ const DefaultHeader = () => {
             <ButtonGroup size="large">
                <Button
                   type="primary"
-                  style={{ display: 'flex', backgroundColor: '#FF7A45', borderColor: '#FF7A45', color: '#FFFFFF' }}
+                  style={{ display: 'flex', alignItems: 'center', marginRight: '8px' }}
                >
+                  <UserOutlined style={{ marginRight: '4px' }} />
                   {user?.name}
                </Button>
                <Button
                   type="primary"
                   icon={<PoweroffOutlined />}
                   onClick={() => handleLogout()}
-                  style={{ backgroundColor: '#FF7A45', borderColor: '#FF7A45' }}
-               />
+               >
+                  Logout
+               </Button>
             </ButtonGroup>
-
          ) : (
-            <div style={{ display: 'flex', gap: '1%' }}>
-               <Link to="/login" style={{ color: '#8B5CF6', textDecoration: 'none' }}>
-                  <Button icon={<UserOutlined />} style={{ borderColor: '#8B5CF6', color: '#8B5CF6' }}>
+            <div style={{ display: 'flex', gap: '8px' }}>
+               <Link to="/login" style={{ color: 'inherit', textDecoration: 'none' }}>
+                  <Button icon={<UserOutlined />}>
                      Login
                   </Button>
                </Link>
-               <Link to="/register" style={{ color: '#8B5CF6', textDecoration: 'none' }}>
-                  <Button type="primary" icon={<UserAddOutlined />} style={{ backgroundColor: '#FF7A45', borderColor: '#FF7A45' }}>
+               <Link to="/register" style={{ color: 'inherit', textDecoration: 'none' }}>
+                  <Button type="primary" icon={<UserAddOutlined />}>
                      Register
                   </Button>
                </Link>
             </div>
          )}
-
       </Header>
    );
 };

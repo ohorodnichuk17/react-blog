@@ -14,6 +14,7 @@ export interface IAccountState {
     user: IUser | null,
     token: string | null,
     isLogin: boolean,
+    isAdmin: boolean,
     status: Status;
 }
 

@@ -1,17 +1,15 @@
 import React from 'react';
-import { Button, Image, Divider, Flex, Form, Input, Row, Typography, message, Spin } from 'antd';
-import logo from '../../assets/login.png';
-import { ILogin } from '../../interfaces/account/index.ts';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux/index.ts';
+import { Button, Form, Input, Typography, message, Spin } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { login } from '../../store/accounts/accounts.actions.ts';
 import { Link, useNavigate } from 'react-router-dom';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { useNotification } from '../../hooks/notification/index.ts';
-import { Status } from '../../utils/enums/index.ts';
+import { useNotification } from '../../hooks/notification';
+import { Status } from '../../utils/enums';
+import { ILogin } from '../../interfaces/account/index.ts';
 
-const { Title } = Typography;
-
-const Login: React.FC = () => {
+const LoginPage: React.FC = () => {
    const navigate = useNavigate();
    const dispatch = useAppDispatch();
    const [messageApi, contextHolder] = message.useMessage();
@@ -21,7 +19,6 @@ const Login: React.FC = () => {
    const onFinish = async (values: ILogin) => {
       try {
          const response = await dispatch(login(values));
-         console.log(response)
          unwrapResult(response);
          navigate('/');
       } catch (error) {
@@ -31,66 +28,47 @@ const Login: React.FC = () => {
 
    return (
       <Spin tip="Loading" size="large" spinning={status === Status.LOADING}>
-         <Row gutter={16}>
-            {contextHolder}
-            <Divider orientation="left" style={{ color: '#8B5CF6' }}>Вхід</Divider>
-            <Flex vertical style={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
-               <Image
-                  preview={false}
-                  width={200}
-                  src={logo}
-                  style={{ marginBottom: 20 }}
-               />
-               <Form
-                  name="basic"
-                  labelCol={{ span: 6 }}
-                  wrapperCol={{ span: 16 }}
-                  style={{ width: 700 }}
-                  initialValues={{ remember: true }}
-                  onFinish={onFinish}
-                  autoComplete="off"
+         {contextHolder}
+         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <Form
+               name="basic"
+               initialValues={{ remember: true }}
+               onFinish={onFinish}
+               style={{ width: 300 }}
+            >
+               <Typography.Title level={2} style={{ textAlign: 'center', marginBottom: 40 }}>Вхід</Typography.Title>
+               <Form.Item
+                  name="email"
+                  rules={[
+                     {
+                        required: true,
+                        message: 'Будь ласка введіть ваш e-mail!',
+                     },
+                  ]}
                >
-                  <Form.Item
-                     name="email"
-                     label="Email"
-                     rules={[
-                        {
-                           type: 'email',
-                           message: 'The input is not valid E-mail!',
-                        },
-                        {
-                           required: true,
-                           message: 'Будь ласка введіть ваш e-mail!',
-                        },
-                     ]}
-                  >
-                     <Input />
-                  </Form.Item>
+                  <Input prefix={<UserOutlined />} placeholder="Email" />
+               </Form.Item>
 
-                  <Form.Item
-                     label="Password"
-                     name="password"
-                     rules={[{ required: true, message: 'Будь ласка введіть ваш пароль!' }]}
-                  >
-                     <Input.Password />
-                  </Form.Item>
+               <Form.Item
+                  name="password"
+                  rules={[{ required: true, message: 'Будь ласка введіть ваш пароль!' }]}
+               >
+                  <Input.Password prefix={<LockOutlined />} placeholder="Пароль" />
+               </Form.Item>
 
-                  <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
-                     <Button size="large" type="primary" htmlType="submit" style={{ paddingInline: 50, backgroundColor: '#8B5CF6', borderColor: '#8B5CF6' }}>
-                        Вхід
-                     </Button>
-                  </Form.Item>
+               <Form.Item>
+                  <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
+                     Вхід
+                  </Button>
+               </Form.Item>
 
-                  <Form.Item wrapperCol={{ span: 24 }}>
-                     <Typography style={{ textAlign: 'center', color: '#8B5CF6' }}>
-                        Немає аккаунта? <Link to="/register" style={{ color: '#8B5CF6' }}>Створити зараз!</Link>
-                     </Typography>
-                  </Form.Item>
-               </Form>
-            </Flex>
-         </Row>
+               <Typography.Text style={{ textAlign: 'center', display: 'block' }}>
+                  Немає аккаунта? <Link to="/register">Створити зараз!</Link>
+               </Typography.Text>
+            </Form>
+         </div>
       </Spin>
    );
 };
 
-export default Login;
+export default LoginPage;

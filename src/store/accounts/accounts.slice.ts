@@ -12,14 +12,17 @@ function isRejectedAction(action: AnyAction): action is RejectedAction {
 
 const updateUserState = (state: IAccountState, token: string): void => {
     const { name, email, roles } = jwtDecode<IUser>(token);
-    console.log("name is: ", name)
-    console.log("email is: ", email)
-    console.log("roles is: ", roles)
+
+    if (roles.includes('admin')) {
+        state.isAdmin = true;
+    }
+
     state.user = {
         name,
         email,
         roles,
     };
+
     state.token = token;
     state.isLogin = true;
 
@@ -31,6 +34,7 @@ const initialState: IAccountState = {
     user: null,
     token: null,
     isLogin: false,
+    isAdmin: false,
     status: Status.IDLE,
 };
 
